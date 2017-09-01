@@ -28,9 +28,10 @@ set guioptions-=l
 set guioptions-=L
 
 " Colorscheme
+"
+syntax enable
 set background=dark
-colorscheme peaksea
-
+colorscheme solarized
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
