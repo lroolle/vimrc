@@ -180,21 +180,46 @@ nnoremap % :MtaJumpToOtherTag<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => https://github.com/Valloric/YouCompleteMe#user-guide
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:ycm_key_list_select_completion = ['<Down>']
-"let g:ycm_key_list_previous_completion=['<c-p>']
-"let g:ycm_key_list_previous_completion = ['<Up>']
-"
-"python with virtualenv support
-
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>', '<Tab>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>', '<S-Tab>']
 let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>i:YcmCompleter GoToDefinitionElseDeclaration<CR>
+"map <F4>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-"在注释输入中也能补全
+nnoremap <leader>i :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Let YCM read tags from Ctags file
+let g:ycm_collect_identifiers_from_tags_files = 1
+" Default 1, just ensure
+let g:ycm_use_ultisnips_completer = 1
+" Completion for programming language's keyword
+let g:ycm_seed_identifiers_with_syntax = 1
+" Completion in comments
 let g:ycm_complete_in_comments = 1
-""在字符串输入中也能补全
+" Completion in string
 let g:ycm_complete_in_strings = 1
-""注释和字符串中的文字也会被收入补全
+
+" 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
-""Stop asking once per .ycm_extra_conf.py file if it is safe to be loaded
+" Stop asking once per .ycm_extra_conf.py file if it is safe to be loaded
 let g:ycm_confirm_extra_conf = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => https://github.com/altercation/vim-colors-solarized 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+set background=dark
+" Terminal color conflict with vim solarized    
+set t_Co=256
+colorscheme solarized
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => https://github.com/SirVer/ultisnips
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-Space>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 

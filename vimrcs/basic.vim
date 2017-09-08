@@ -145,7 +145,6 @@ set foldcolumn=1
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
@@ -156,8 +155,6 @@ endif
 "    colorscheme desert
 "catch
 "endtry
-
-set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
