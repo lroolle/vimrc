@@ -4,11 +4,11 @@
 
 Add some personal favors 
 
-- TagBar, It actually works so good with NERDTree: [majutsushi/tagbar](https://github.com/majutsushi/tagbar)
-- Pep8 autoformat: [Chiel92/vim-autoformat](https://github.com/Chiel92/vim-autoformat)
-- Python snips: [SirVer/ultisnips](https://github.com/SirVer/ultisnips) 
-- Auto complete: [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe) 
-- Match HTML tags: [Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways)
+- [majutsushi/tagbar](https://github.com/majutsushi/tagbar): TagBar, It actually works so good with NERDTree
+- [Chiel92/vim-autoformat](https://github.com/Chiel92/vim-autoformat): Pep8 autoformat 
+- [SirVer/ultisnips](https://github.com/SirVer/ultisnips): Python snips 
+- [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe): Auto complete 
+- [Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways): Match HTML tags 
 - [maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)
 - [triglav/vim-visual-increment](https://github.com/triglav/vim-visual-increment)
 
@@ -16,7 +16,7 @@ Add some personal favors
 ...And other personal configs
 
 
-~~~~~
+=====
 
 
 # The Ultimate vimrc
