@@ -1,5 +1,24 @@
 ![VIM](https://dnp4pehkvoo6n.cloudfront.net/43c5af597bd5c1a64eb1829f011c208f/as/Ultimate%20Vimrc.svg)
 
+# Forked from [amix/vimrc](https://github.com/amix/vimrc) 
+
+Add some personal favors 
+
+- TagBar, It actually works so good with NERDTree: [majutsushi/tagbar](https://github.com/majutsushi/tagbar)
+- Pep8 autoformat: [Chiel92/vim-autoformat](https://github.com/Chiel92/vim-autoformat)
+- Python snips: [SirVer/ultisnips](https://github.com/SirVer/ultisnips) 
+- Auto complete: [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe) 
+- Match HTML tags: [Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways)
+- [maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)
+- [triglav/vim-visual-increment](https://github.com/triglav/vim-visual-increment)
+
+
+...And other personal configs
+
+
+~~~~~
+
+
 # The Ultimate vimrc
 
 Over the last 10 years, I have used and tweaked Vim. This configuration is the ultimate vimrc (or at least my version of it).
