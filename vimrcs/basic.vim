@@ -141,6 +141,22 @@ endif
 set foldcolumn=1
 
 
+" FoldMethod 
+let g:FoldMethod = 0
+
+fun! ToggleFold()
+    if g:FoldMethod == 0
+        exe 'set foldmethod=indent'
+        let g:FoldMethod = 1
+    else
+        exe 'set foldmethod=marker'
+        let g:FoldMethod = 0
+    endif
+endfun
+
+map <leader>ff :call ToggleFold()<cr>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -240,8 +256,19 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
+
 map <leader>tm :tabmove 
 map <leader>t<leader> :tabnext 
+
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -337,6 +364,14 @@ map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
+
+
+" Copy & Paste
+ 
+" noremap <Leader>y "*y
+" noremap <Leader>p "*p
+noremap <Leader>y "+y
+noremap <Leader>p "+p
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
