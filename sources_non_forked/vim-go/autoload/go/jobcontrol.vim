@@ -33,10 +33,9 @@ function! go#jobcontrol#RemoveHandler(id) abort
   unlet s:handlers[a:id]
 endfunction
 
-" spawn spawns a go subcommand with the name and arguments with jobstart. Once
-" a job is started a reference will be stored inside s:jobs. spawn changes the
-" GOPATH when g:go_autodetect_gopath is enabled. The job is started inside the
-" current files folder.
+" spawn spawns a go subcommand with the name and arguments with jobstart. Once a
+" job is started a reference will be stored inside s:jobs. The job is started
+" inside the current files folder.
 function! s:spawn(bang, desc, for, args) abort
   let status_type = a:args[0]
   let status_dir = expand('%:p:h')
@@ -63,11 +62,8 @@ function! s:spawn(bang, desc, for, args) abort
         \ 'status_dir' : status_dir,
         \ 'started_at' : started_at,
         \ 'for' : a:for,
+        \ 'errorformat': &errorformat,
         \ }
-
-  " modify GOPATH if needed
-  let old_gopath = $GOPATH
-  let $GOPATH = go#path#Detect()
 
   " execute go build in the files directory
   let cd = exists('*haslocaldir') && haslocaldir() ? 'lcd ' : 'cd '
@@ -93,9 +89,6 @@ function! s:spawn(bang, desc, for, args) abort
   let s:jobs[id] = job
 
   execute cd . fnameescape(dir)
-
-  " restore back GOPATH
-  let $GOPATH = old_gopath
 
   return job
 endfunction
@@ -133,7 +126,6 @@ function! s:on_exit(job_id, exit_status, event) dict abort
   let l:listtype = go#list#Type(self.for)
   if a:exit_status == 0
     call go#list#Clean(l:listtype)
-    call go#list#Window(l:listtype)
 
     let self.state = "SUCCESS"
 
@@ -151,8 +143,9 @@ function! s:on_exit(job_id, exit_status, event) dict abort
     call go#util#EchoError("[" . self.status_type . "] FAILED")
   endif
 
-  let errors = go#tool#ParseErrors(std_combined)
-  let errors = go#tool#FilterValids(errors)
+  " parse the errors relative to self.jobdir
+  call go#list#ParseFormat(l:listtype, self.errorformat, std_combined, self.for)
+  let errors = go#list#Get(l:listtype)
 
   execute cd . fnameescape(dir)
 
@@ -164,7 +157,6 @@ function! s:on_exit(job_id, exit_status, event) dict abort
 
   " if we are still in the same windows show the list
   if self.winnr == winnr()
-    call go#list#Populate(l:listtype, errors, self.desc)
     call go#list#Window(l:listtype, len(errors))
     if !empty(errors) && !self.bang
       call go#list#JumpToFirst(l:listtype)

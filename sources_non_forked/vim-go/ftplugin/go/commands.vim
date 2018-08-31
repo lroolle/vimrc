@@ -87,7 +87,7 @@ command! -nargs=? -complete=file GoDecls call go#decls#Decls(0, <q-args>)
 command! -nargs=? -complete=dir GoDeclsDir call go#decls#Decls(1, <q-args>)
 
 " -- impl
-command! -nargs=* -buffer -complete=customlist,go#impl#Complete GoImpl call go#impl#Impl(<f-args>)
+command! -nargs=* -complete=customlist,go#impl#Complete GoImpl call go#impl#Impl(<f-args>)
 
 " -- template
 command! -nargs=0 GoTemplateAutoCreateToggle call go#template#ToggleAutoCreate()
@@ -97,5 +97,12 @@ command! -nargs=0 GoKeyify call go#keyify#Keyify()
 
 " -- fillstruct
 command! -nargs=0 GoFillStruct call go#fillstruct#FillStruct()
+
+" -- debug
+if !exists(':GoDebugStart')
+  command! -nargs=* -complete=customlist,go#package#Complete GoDebugStart call go#debug#Start(0, <f-args>)
+  command! -nargs=* -complete=customlist,go#package#Complete GoDebugTest  call go#debug#Start(1, <f-args>)
+  command! -nargs=? GoDebugBreakpoint call go#debug#Breakpoint(<f-args>)
+endif
 
 " vim: sw=2 ts=2 et

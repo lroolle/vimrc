@@ -45,9 +45,8 @@ let g:yankstack_yank_keys = ['y', 'd']
 "nmap <c-p> <Plug>yankstack_substitute_older_paste
 "nmap <c-n> <Plug>yankstack_substitute_newer_paste
 
-nmap <leader>p <Plug>yankstack_substitute_older_paste
+"nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>n <Plug>yankstack_substitute_newer_paste
-
 
 """"""""""""""""""""""""""""""
 " => CTRL-P
@@ -252,26 +251,37 @@ let g:go_fmt_command = "goimports"
 " => Syntastic (syntax checker)
 " => https://github.com/nvie/vim-flake8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+" ! 改用 https://github.com/w0rp/ale
 "let g:syntastic_check_on_open = 1
 
-let g:syntastic_python_checkers=['pyflakes']
+" let g:syntastic_python_checkers=['pyflakes']
 
-" Javascript
-let g:syntastic_javascript_checkers = ['jshint']
+" " Javascript
+" let g:syntastic_javascript_checkers = ['jshint']
 
-" Go
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
+" " Go
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 
-" Custom CoffeeScript SyntasticCheck
-func! SyntasticCheckCoffeescript()
-    let l:filename = substitute(expand("%:p"), '\(\w\+\)\.coffee', '.coffee.\1.js', '')
-    execute "tabedit " . l:filename
-    execute "SyntasticCheck"
-    execute "Errors"
-endfunc
-nnoremap <silent> <leader>c :lclose<cr>
+" " Custom CoffeeScript SyntasticCheck
+" func! SyntasticCheckCoffeescript()
+"     let l:filename = substitute(expand("%:p"), '\(\w\+\)\.coffee', '.coffee.\1.js', '')
+"     execute "tabedit " . l:filename
+"     execute "SyntasticCheck"
+"     execute "Errors"
+" endfunc
+" nnoremap <silent> <leader>c :lclose<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" > https://github.com/w0rp/ale
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_linters = {
+\   'javascript': ['jshint'],
+\   'python': ['pyflakes', ],
+\   'go': ['go', 'golint', 'errcheck']
+\}
+
+nmap <silent> <leader>a <Plug>(ale_next_wrap)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -291,11 +301,14 @@ nnoremap % :MtaJumpToOtherTag<cr>
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>', '<Tab>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>', '<S-Tab>']
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_goto_buffer_command = 'vertical-split'
 "map <F4>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_python_binary_path = 'python'
 
 nnoremap <leader>] : YcmCompleter GoTo<CR>
 nnoremap <leader>i : YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>; : YcmCompleter GoToReferences<CR>
+
 
 " Let YCM read tags from Ctags file
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -309,9 +322,9 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 
 " 注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
+let g:ycm_collect_identifiers_from_comments_and_strings = 1 
 " Stop asking once per .ycm_extra_conf.py file if it is safe to be loaded
-let g:ycm_confirm_extra_conf = 0
+let g:ycm_confirm_extra_conf = 1 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => https://github.com/altercation/vim-colors-solarized
@@ -347,3 +360,44 @@ let g:UltiSnipsEditSplit="vertical"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap <c-s-l> :Autoformat<CR>
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Call black
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <c-s-b> :!black %:p<CR>
+:autocmd BufWritePost *.py :!black %:p
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" https://github.com/moorereason/vim-markdownfmt 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:markdownfmt_command = 'markdownfmt'
+" :autocmd BufWritePost *.md :call markdownfmt#Format()<CR>
+ 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" https://github.com/moorereason/vim-markdownfmt 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vmap <leader>c :<Plug>VisualIncrement<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fast fold 
+" > https://github.com/Konfekt/FastFold.git
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 1
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:ruby_fold = 1
+let g:perl_fold = 1
+let g:perl_fold_blocks = 1
+let g:r_syntax_folding = 1
+let g:rust_fold = 1
+let g:php_folding = 1
